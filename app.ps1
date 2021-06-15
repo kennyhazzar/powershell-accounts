@@ -1,8 +1,11 @@
-﻿Add-Type -AssemblyName System.Windows.Forms
+﻿#  Добавлю все что надо
+Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
+
 $global:IfAbout = $false
 $global:AboutLabel = $null
 
+# Создание основного окна !@#$%^&*
 $form = New-Object System.Windows.Forms.Form
 $form.Text = 'Select a Computer'
 $form.Size = New-Object System.Drawing.Size(800, 800)
@@ -30,8 +33,10 @@ $AboutAccount.Text = 'Просмотреть информацию'
 function CreateAbout() {
     $global:AboutLabel = New-Object System.Windows.Forms.Label
     $global:AboutLabel.Location = New-Object System.Drawing.Point(10, 200)
-    $global:AboutLabel.Size = New-Object System.Drawing.Size(200, 23)
-    $global:AboutLabel.Text = $global:listBox.Text
+    $global:AboutLabel.Size = New-Object System.Drawing.Size(200, 1100)
+    $UserInformation = Get-CimInstance -ClassName Win32_UserAccount -Property LocalAccount | Where-Object -Property Name -eq $global:listBox.SelectedItem
+    $global:AboutLabel.Text = "Имя: " + $UserInformation.Name + "`nКомпьютер: " + $UserInformation.Domain
+     
     $global:listBox.Text
     $form.Controls.Add($AboutLabel)
 }
