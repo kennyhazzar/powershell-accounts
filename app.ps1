@@ -84,7 +84,6 @@ $EditName.Add_Click({
         $EditClickForm.AcceptButton = $EditCancelButton
 
         $EditClickForm.Controls.Add($EditConfirmLabel)
-
         $EditClickForm.ShowDialog()
     }
 })
